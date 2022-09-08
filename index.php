@@ -11,7 +11,7 @@ require 'functions.php';
 
 //pagination
 //konfigurasi
-$jumlahdataperhalaman = 2;
+$jumlahdataperhalaman = 5;
 $jumlahData = count(query("SELECT * FROM apotik"));
 $jumlahHalaman = ceil($jumlahData / $jumlahdataperhalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -25,6 +25,7 @@ $apotik = query("SELECT * FROM apotik LIMIT $awalData, $jumlahdataperhalaman");
 if( isset($_POST["cari"]) ) {
 	$apotik = cari($_POST["keyword"]);
 }
+
 
 ?>
 
@@ -66,6 +67,9 @@ if( isset($_POST["cari"]) ) {
 <?php endif; ?>
 
 <br>
+<a href="kategori.php">Kategori Obat Yang Ada</a>
+
+<br>
 
 <table border="1" cellpadding="10" cellspacing="0">
 	<tr>
@@ -73,6 +77,7 @@ if( isset($_POST["cari"]) ) {
 		<th>Aksi</th>
 		<th>Gambar</th>
 		<th>Nama</th>
+		<th>Kode Obat</th>
 		<th>Kategori</th>
 		<th>Deskripsi</th>
 	</tr>
@@ -86,6 +91,7 @@ if( isset($_POST["cari"]) ) {
 		</td>
 		<td><img src="img/<?= $row["gambar"]; ?>" width="50"></td>
 		<td><?= $row["nama"] ?></td>
+		<td><?= $row["kodeobat"] ?></td>
 		<td><?= $row["kategori"] ?></td>
 		<td><?= $row["deskripsi"] ?></td>
 	</tr>

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if ( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
 require 'functions.php';
 
 // cek apakah tombol submit sudah ditekan apa belum
@@ -42,12 +46,16 @@ if( isset($_POST["submit"]) ) {
 			<input type="text" name="nama" id="nama">
 		</li>
 		<li>
+			<label for="kodeobat">Kode Obat : </label>
+			<input type="text" name="kodeobat" id="kodeobat">
+		</li>
+		<li>
 			<label for="kategori">Kategories : </label>
 			<input type="text" name="kategori" id="kategori" required>
 		</li>
 		<li>
-			<label for="deskrisi">Deskrisi : </label>
-			<input type="text" name="deskrisi" id="deskrisi">
+			<label for="deskripsi">Deskripsi : </label>
+			<input type="text" name="deskripsi" id="deskripsi">
 		</li>
 		<li>
 			<label for="gambar">Gambar : </label>

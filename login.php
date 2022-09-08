@@ -93,6 +93,7 @@ if (isset($_POST["login"])) {
 				<button type="submit" name="login">Login</button>
 			</li>
 		</ul>
+	<a class="btn btn-primary" href="registrasi.php">Registrasi Sekarang!!</a>
 
 	</form>
 

@@ -47,6 +47,8 @@ if (isset($_POST["register"])) {
 				<button type="submit" name="register">Registrasi</button>
 			</li>
 		</ul>
+	<a class="btn btn-primary" href="login.php"><< Kembali Ke Halaman Login</a>
+
 		
 	</form>
 

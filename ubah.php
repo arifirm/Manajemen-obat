@@ -1,5 +1,9 @@
 <?php
 session_start();
+if ( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
 require 'functions.php';
 
 // ambil data diURL
@@ -48,6 +52,10 @@ if( isset($_POST["submit"]) ) {
 		<li>
 			<label for="nama">Nama Obat : </label>
 			<input type="text" name="nama" id="nama" value="<?= $mhs["nama"] ?>">
+		</li>
+		<li>
+			<label for="kodeobat">Kode Obat : </label>
+			<input type="text" name="kodeobat" id="kodeobat" value="<?= $mhs["kodeobat"] ?>">
 		</li>
 		<li>
 			<label for="kategori">Kategories : </label>

@@ -16,6 +16,7 @@ function tambah($data) {
 	global $conn;
 
 	$nama = htmlspecialchars($data["nama"]);
+	$kodeobat = htmlspecialchars($data["kodeobat"]);
 	$kategori = htmlspecialchars($data["kategori"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	// upload gambar
@@ -26,7 +27,7 @@ function tambah($data) {
 
 	$query = "INSERT INTO apotik
               VALUES
-	          ('', '$nama', '$kategori', '$deskripsi', '$gambar')
+	          ('', '$nama', '$kodeobat', '$kategori', '$deskripsi', '$gambar')
 	          ";
 	mysqli_query($conn, $query);
 
@@ -92,6 +93,7 @@ function ubah($data) {
     
     $id = $data["id"];
 	$nama = htmlspecialchars($data["nama"]);
+	$kodeobat = htmlspecialchars($data["kodeobat"]);
 	$kategori = htmlspecialchars($data["kategori"]);
 	$deskripsi = htmlspecialchars($data["deskripsi"]);
 	$gambarlama = htmlspecialchars($data["gambarLama"]);
@@ -105,6 +107,7 @@ function ubah($data) {
 
 	$query = "UPDATE apotik SET
               nama = '$nama',
+              kodeobat = '$kodeobat',
 	          kategori = '$kategori',
 	          deskripsi = '$deskripsi',
 	          gambar = '$gambar'
@@ -120,8 +123,7 @@ function cari($keyword) {
 	$query = "SELECT * FROM apotik 
 	           WHERE
 	           nama LIKE '%$keyword%' OR
-	           kategori LIKE '%$keyword%' OR
-               deskripsi LIKE '%$keyword%'
+	           kodeobat LIKE '%$keyword%'
 	           ";
 	return query($query);
 }
@@ -159,12 +161,24 @@ function registrasi($data) {
 	mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password')");
 
 	return mysqli_affected_rows($conn);
-
-
-
 }
 
+// class kategori
+// {
+// function tampil_kategori()
+//  {
+// 	$ambildata = mysqli_query("SELECT * FROM kategori_obat");
+// 	if (mysqli_num_rows($ambildata) > 0) {
+// 		while($add = mysqli_num_rows($ambildata))
+// 			$data[] = $add;
+// 		return $data;
+// 	} else {
+// 		echo "kategori tidak ditemukan";
+// 	}
+//  }
+// }
 
+// $kategori = new kategori();
 
 
 ?>
