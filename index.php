@@ -17,9 +17,16 @@ $jumlahHalaman = ceil($jumlahData / $jumlahdataperhalaman);
 $halamanAktif = (isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 $awalData = ( $jumlahdataperhalaman * $halamanAktif) - $jumlahdataperhalaman;
 
+if (isset($_GET["filtercategory"])) {
+	$kategori = $_GET["kategori"];
 
+	$outputArtikel = query("SELECT * FROM apotik WHERE kategori = '$kategori' ");
+} else {
+	$outputArtikel = query("SELECT * FROM apotik LIMIT $awalData, $jumlahdataperhalaman");
+}
 
-$apotik = query("SELECT * FROM apotik LIMIT $awalData, $jumlahdataperhalaman");
+$apotik = $outputArtikel;
+
 
 // tombol cari ditekan
 if( isset($_POST["cari"]) ) {
@@ -43,11 +50,38 @@ if( isset($_POST["cari"]) ) {
 <a href="tambah.php">Tambah data obat</a>
 <br><br>
 
+<style>
+		.loader {
+			width: 100px;
+			position: absolute;
+			top: 118px;
+			left: 230px;
+			z-index: -1;
+			display: none;
+		}
+	</style>
+	<script src="js/jquery-3.6.1.min.js"></script>
+	<script src="js/script.js"></script>
+
 <form action="" method="post">
-	<input type="text" name="keyword" size="30" autofocus placeholder="Search" autocomplete="off">
-	<button type="submit" name="cari">cari!</button>
+	<input type="text" name="keyword" size="30" autofocus placeholder="Search" autocomplete="off" id="keyword">
+	<button type="submit" name="cari" id="tombol-cari">cari!</button>
+
+    <img src="img/loader.gif" class="loader">
+
 </form>
-<br><br>
+<br>
+
+<form action="" method="get">
+	<ul>
+		<li>
+			<label for="kategori">Kategori :</label>
+			<input type="text" name="kategori" id="kategori">
+		</li>
+		<li><button type="submit" name="filtercategory">Filter</button></li>
+	</ul>
+	
+</form>
 
 <!-- navigasi -->
 <?php if( $halamanAktif > 1 ) : ?>
@@ -70,7 +104,7 @@ if( isset($_POST["cari"]) ) {
 <a href="kategori.php">Kategori Obat Yang Ada</a>
 
 <br>
-
+<div id="container">
 <table border="1" cellpadding="10" cellspacing="0">
 	<tr>
 		<th>No.</th>
@@ -98,6 +132,7 @@ if( isset($_POST["cari"]) ) {
 	<?php $i++; ?>
 <?php endforeach; ?>
 </table>
+</div>
 
 </body>
 </html>

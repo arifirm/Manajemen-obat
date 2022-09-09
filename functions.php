@@ -100,7 +100,7 @@ function ubah($data) {
 
 	// cek apakah user baru pilih gambar baru atau tidak
 	if( $_FILES['gambar']['error'] === 4 ) {
-		$gambar = $gambarLama;
+		$gambar = $gambarlama;
 	} else {
 		$gambar = upload();
 	}
@@ -163,22 +163,6 @@ function registrasi($data) {
 	return mysqli_affected_rows($conn);
 }
 
-// class kategori
-// {
-// function tampil_kategori()
-//  {
-// 	$ambildata = mysqli_query("SELECT * FROM kategori_obat");
-// 	if (mysqli_num_rows($ambildata) > 0) {
-// 		while($add = mysqli_num_rows($ambildata))
-// 			$data[] = $add;
-// 		return $data;
-// 	} else {
-// 		echo "kategori tidak ditemukan";
-// 	}
-//  }
-// }
-
-// $kategori = new kategori();
 
 
 ?>
